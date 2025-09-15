@@ -2,13 +2,8 @@ name: Build and Deploy Server
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - 'server/**'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'server/**'
+    branches: 
+      - main
 
 jobs:
   build-and-push:
