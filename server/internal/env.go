@@ -7,19 +7,50 @@ import (
 )
 
 type Config struct {
-	DatabaseURL string
-	Port        int
+	DatabaseURL  string
+	PostgresUser string
+	PostgresPass string
+	PostgresDB   string
+	PostgresHost string
+	PostgresPort string
+	Port         int
 }
 
 func LoadConfig() (*Config, error) {
 	config := &Config{}
 
-	databaseURL := os.Getenv("DATABASE_URL")
-	if databaseURL == "" {
-		return nil, fmt.Errorf("DATABASE_URL environment variable is required")
+	// Load individual postgres variables
+	config.PostgresUser = os.Getenv("POSTGRES_USER")
+	if config.PostgresUser == "" {
+		return nil, fmt.Errorf("POSTGRES_USER environment variable is required")
 	}
-	config.DatabaseURL = databaseURL
 
+	config.PostgresPass = os.Getenv("POSTGRES_PASSWORD")
+	if config.PostgresPass == "" {
+		return nil, fmt.Errorf("POSTGRES_PASSWORD environment variable is required")
+	}
+
+	config.PostgresDB = os.Getenv("POSTGRES_DB")
+	if config.PostgresDB == "" {
+		return nil, fmt.Errorf("POSTGRES_DB environment variable is required")
+	}
+
+	// Default postgres host and port
+	config.PostgresHost = os.Getenv("POSTGRES_HOST")
+	if config.PostgresHost == "" {
+		config.PostgresHost = "kochen-postgres"
+	}
+
+	config.PostgresPort = os.Getenv("POSTGRES_PORT")
+	if config.PostgresPort == "" {
+		config.PostgresPort = "5432"
+	}
+
+	// Build database URL from components
+	config.DatabaseURL = fmt.Sprintf("postgresql://%s:%s@%s:%s/%s",
+		config.PostgresUser, config.PostgresPass, config.PostgresHost, config.PostgresPort, config.PostgresDB)
+
+	// Load server port
 	portStr := os.Getenv("PORT")
 	if portStr == "" {
 		config.Port = 8080
