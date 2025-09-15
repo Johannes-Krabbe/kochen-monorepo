@@ -21,6 +21,7 @@ func NewRouter(db *DB) *chi.Mux {
 	authHandler := auth.NewAuthHandler(db.Queries)
 
 	r.Get("/health", handlers.HealthCheck)
+	r.Get("/", handlers.GetIndex)
 	
 	r.Route("/v1", func(r chi.Router) {
 		r.Route("/auth", func(r chi.Router) {
