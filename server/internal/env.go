@@ -47,8 +47,12 @@ func LoadConfig() (*Config, error) {
 	}
 
 	// Build database URL from components
-	config.DatabaseURL = fmt.Sprintf("postgresql://%s:%s@%s:%s/%s",
-		config.PostgresUser, config.PostgresPass, config.PostgresHost, config.PostgresPort, config.PostgresDB)
+	sslMode := os.Getenv("POSTGRES_SSLMODE")
+	if sslMode == "" {
+		sslMode = "require"
+	}
+	config.DatabaseURL = fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=%s",
+		config.PostgresUser, config.PostgresPass, config.PostgresHost, config.PostgresPort, config.PostgresDB, sslMode)
 
 	// Load server port
 	portStr := os.Getenv("PORT")
