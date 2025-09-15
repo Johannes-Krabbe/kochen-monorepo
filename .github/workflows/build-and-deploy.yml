@@ -65,6 +65,7 @@ jobs:
           # Run migrations
           docker run --rm --network kochen-server_default \
             --env-file .env \
+            -e POSTGRES_SSLMODE=disable \
             johanneskrabbe/kochen-server:latest \
             ./migrator
 
