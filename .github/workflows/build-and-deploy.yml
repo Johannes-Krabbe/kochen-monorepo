@@ -53,6 +53,9 @@ jobs:
           cd infra/server
           cp ~/setup/.env .
 
+          # Login to Docker Hub
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
           # Pull latest image
           docker compose pull kochen-server
 
@@ -74,6 +77,9 @@ jobs:
 
           # Clean up old images
           docker image prune -f
+
+          # Logout from Docker Hub
+          docker logout
         EOF
 
     - name: Cleanup SSH
