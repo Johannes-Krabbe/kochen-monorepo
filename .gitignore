@@ -1,0 +1,17 @@
+# Environment files
+.env
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Temporary directory
+tmp/
+
+# OS files
+.DS_Store

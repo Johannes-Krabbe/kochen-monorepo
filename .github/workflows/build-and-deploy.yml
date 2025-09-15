@@ -1,0 +1,54 @@
+name: Build and Deploy Server
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup SSH connection to server
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Connect to server and build Docker image
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          # Clone or update the repository
+          if [ -d "kochen-monorepo" ]; then
+            cd kochen-monorepo
+            git fetch origin
+            git reset --hard origin/main
+          else
+            git clone https://github.com/${{ github.repository }}.git kochen-monorepo
+            cd kochen-monorepo
+          fi
+
+          # Build the Docker image
+          cd server
+          docker build -t johanneskrabbe/kochen-server:latest .
+          docker tag johanneskrabbe/kochen-server:latest johanneskrabbe/kochen-server:${{ github.sha }}
+
+          # Login to Docker Hub and push
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker push johanneskrabbe/kochen-server:latest
+          docker push johanneskrabbe/kochen-server:${{ github.sha }}
+
+          # Cleanup
+          docker logout
+        EOF
+
+    - name: Cleanup SSH
+      if: always()
+      run: rm -f ~/.ssh/id_rsa
