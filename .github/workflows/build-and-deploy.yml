@@ -44,7 +44,7 @@ jobs:
           docker logout
         EOF
 
-    - name: Deploy with docker-compose
+    - name: Deploy with docker compose
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
           cd kochen-monorepo
@@ -54,10 +54,10 @@ jobs:
           cp ~/setup/.env .
 
           # Pull latest image
-          docker-compose pull kochen-server
+          docker compose pull kochen-server
 
           # Start services (database first)
-          docker-compose up -d kochen-postgres
+          docker compose up -d kochen-postgres
 
           # Wait for database to be ready
           sleep 10
@@ -69,7 +69,7 @@ jobs:
             ./migrator
 
           # Start the server
-          docker-compose up -d kochen-server
+          docker compose up -d kochen-server
 
           # Clean up old images
           docker image prune -f
