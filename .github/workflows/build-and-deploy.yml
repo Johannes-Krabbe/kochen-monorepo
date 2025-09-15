@@ -31,7 +31,7 @@ jobs:
             git fetch origin
             git reset --hard origin/main
           else
-            git clone https://github.com/${{ github.repository }}.git kochen-monorepo
+            git clone https://github.com/johannes-krabbe/kochen-monorepo.git
             cd kochen-monorepo
           fi
 
