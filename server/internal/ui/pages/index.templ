@@ -1,0 +1,12 @@
+package pages
+
+import "github.com/Johannes-Krabbe/kochen-monorepo/server/internal/ui/components"
+
+templ Homepage() {
+	@components.Base() {
+		@components.Counter(0)
+		<button hx-trigger="click" hx-target="#counter" hx-swap="innerHTML" hx-post="/component/increase">
+			Increase
+		</button>
+	}
+}

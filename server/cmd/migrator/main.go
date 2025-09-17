@@ -4,11 +4,11 @@ import (
 	"flag"
 	"log"
 
+	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/joho/godotenv"
-	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal"
 	_ "github.com/lib/pq"
 )
 

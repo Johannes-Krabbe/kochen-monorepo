@@ -1,4 +1,4 @@
-package auth
+package authApiHandlers
 
 import (
 	"context"
@@ -25,7 +25,7 @@ type LoginRequest struct {
 // @Success 200 {object} AuthResponse
 // @Failure 400 {object} errors.ErrorResponse
 // @Failure 500 {object} errors.ErrorResponse
-// @Router /v1/auth/login [post]
+// @Router /api/v1/auth/login [post]
 func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	var req LoginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {

@@ -1,4 +1,4 @@
-package auth
+package authApiHandlers
 
 import (
 	"context"
@@ -13,14 +13,6 @@ import (
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
-
-type AuthHandler struct {
-	queries *sqlc.Queries
-}
-
-func NewAuthHandler(queries *sqlc.Queries) *AuthHandler {
-	return &AuthHandler{queries: queries}
-}
 
 type SignupRequest struct {
 	Username string `json:"username"`
@@ -52,7 +44,7 @@ var usernameRegex = regexp.MustCompile(`^[a-z0-9_-]+$`)
 // @Success 201 {object} AuthResponse
 // @Failure 400 {object} errors.ErrorResponse
 // @Failure 500 {object} errors.ErrorResponse
-// @Router /v1/auth/signup [post]
+// @Router /api/v1/auth/signup [post]
 func (h *AuthHandler) Signup(w http.ResponseWriter, r *http.Request) {
 	var req SignupRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
