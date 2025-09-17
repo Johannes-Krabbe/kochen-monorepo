@@ -18,14 +18,16 @@ migrate_up:
 build_server: gen_templ gen_tailwind
 	rm -rf ./bin/server
 	go build -o bin/server/server cmd/server/main.go
-	mkdir -p ./bin/server/internal/ui
-	cp -r ./internal/ui/static ./bin/server/internal/ui/static
+	rm -rf ./bin/internal/ui/static
+	mkdir -p ./bin/internal/ui
+	cp -r ./internal/ui/static ./bin/internal/ui/static
 
 build_migrator: gen_templ gen_tailwind
 	rm -rf ./bin/migrator
 	go build -o bin/migrator/migrator cmd/migrator/main.go
-	mkdir -p ./bin/migrator/internal/database
-	cp -r ./internal/database/schema ./bin/migrator/internal/database
+	rm -rf ./bin/internal/database
+	mkdir -p ./bin/internal/database
+	cp -r ./internal/database/schema ./bin/internal/database
 
 
 run_server: codegen
