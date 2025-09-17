@@ -89,7 +89,7 @@ jobs:
             --env-file .env \
             -e POSTGRES_SSLMODE=disable \
             johanneskrabbe/kochen-server:latest \
-            ./bin/migrator/migrator
+            ./migrator/migrator
 
           # Start the server
           docker compose up -d kochen-server
