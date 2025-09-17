@@ -18,3 +18,7 @@ tmp/
 
 node_modules/
 bin/
+
+# generated tailwind file
+server/internal/ui/static/main.css
+*_templ.go

@@ -5,7 +5,11 @@ module.exports = {
         "./ui/pages/**/*.{html,js,templ}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Lato', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 }
