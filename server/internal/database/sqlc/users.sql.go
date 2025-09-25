@@ -7,7 +7,7 @@ package database
 
 import (
 	"context"
-	"database/sql"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -31,8 +31,8 @@ type CreateUserRow struct {
 	Email     string
 	Name      string
 	Username  string
-	CreatedAt sql.NullTime
-	UpdatedAt sql.NullTime
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (CreateUserRow, error) {
@@ -66,8 +66,8 @@ type GetUserRow struct {
 	Email     string
 	Name      string
 	Username  string
-	CreatedAt sql.NullTime
-	UpdatedAt sql.NullTime
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 func (q *Queries) GetUser(ctx context.Context, id uuid.UUID) (GetUserRow, error) {
@@ -96,8 +96,8 @@ type GetUserByEmailRow struct {
 	Name         string
 	Username     string
 	PasswordHash string
-	CreatedAt    sql.NullTime
-	UpdatedAt    sql.NullTime
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 func (q *Queries) GetUserByEmail(ctx context.Context, email string) (GetUserByEmailRow, error) {
@@ -127,8 +127,8 @@ type GetUserByEmailOrUsernameRow struct {
 	Name         string
 	Username     string
 	PasswordHash string
-	CreatedAt    sql.NullTime
-	UpdatedAt    sql.NullTime
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 func (q *Queries) GetUserByEmailOrUsername(ctx context.Context, email string) (GetUserByEmailOrUsernameRow, error) {
@@ -158,8 +158,8 @@ type GetUserByUsernameRow struct {
 	Name         string
 	Username     string
 	PasswordHash string
-	CreatedAt    sql.NullTime
-	UpdatedAt    sql.NullTime
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 func (q *Queries) GetUserByUsername(ctx context.Context, username string) (GetUserByUsernameRow, error) {
@@ -188,8 +188,8 @@ type ListUsersRow struct {
 	Email     string
 	Name      string
 	Username  string
-	CreatedAt sql.NullTime
-	UpdatedAt sql.NullTime
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 func (q *Queries) ListUsers(ctx context.Context) ([]ListUsersRow, error) {

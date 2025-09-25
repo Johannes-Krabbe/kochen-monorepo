@@ -6,9 +6,66 @@ package database
 
 import (
 	"database/sql"
+	"database/sql/driver"
+	"fmt"
+	"time"
 
 	"github.com/google/uuid"
+	"github.com/sqlc-dev/pqtype"
 )
+
+type Visibility string
+
+const (
+	VisibilityPUBLIC   Visibility = "PUBLIC"
+	VisibilityUNLISTED Visibility = "UNLISTED"
+	VisibilityPRIVATE  Visibility = "PRIVATE"
+)
+
+func (e *Visibility) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = Visibility(s)
+	case string:
+		*e = Visibility(s)
+	default:
+		return fmt.Errorf("unsupported scan type for Visibility: %T", src)
+	}
+	return nil
+}
+
+type NullVisibility struct {
+	Visibility Visibility
+	Valid      bool // Valid is true if Visibility is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullVisibility) Scan(value interface{}) error {
+	if value == nil {
+		ns.Visibility, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.Visibility.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullVisibility) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.Visibility), nil
+}
+
+type Recipe struct {
+	ID         uuid.UUID
+	OwnerID    uuid.UUID
+	Visibility Visibility
+	Slug       string
+	Content    pqtype.NullRawMessage
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
+}
 
 type User struct {
 	ID                uuid.UUID
@@ -17,6 +74,6 @@ type User struct {
 	Username          string
 	Profilepictureurl sql.NullString
 	PasswordHash      string
-	CreatedAt         sql.NullTime
-	UpdatedAt         sql.NullTime
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
 }

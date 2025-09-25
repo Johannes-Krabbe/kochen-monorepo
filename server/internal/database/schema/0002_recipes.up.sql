@@ -1,0 +1,14 @@
+CREATE TYPE "Visibility" AS ENUM ('PUBLIC', 'UNLISTED', 'PRIVATE');
+
+CREATE TABLE recipes (
+    id UUID PRIMARY KEY,
+
+    owner_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+
+    visibility "Visibility" NOT NULL,
+    slug varchar UNIQUE NOT NULL,
+    content JSONB,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

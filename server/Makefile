@@ -36,5 +36,8 @@ run_server: codegen
 dev_db_start:
 	docker-compose --file ./dev/compose-db.yml up -d
 
+dev_db_drop:
+	docker-compose --file ./dev/compose-db.yml down --volumes
+
 dev: dev_db_start
 	air
