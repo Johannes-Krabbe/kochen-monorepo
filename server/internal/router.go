@@ -7,6 +7,7 @@ import (
 	authApiHandlers "github.com/Johannes-Krabbe/kochen-monorepo/server/internal/handlers/api/auth"
 	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal/handlers/ui/componentHandlers"
 	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal/handlers/ui/pageHandlers"
+	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal/services"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -24,8 +25,12 @@ func NewRouter(db *DB) *chi.Mux {
 	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
 
 	// === UI ===
+	// Services
+	recipeService := services.NewRecipeService(db.Queries)
+
 	// Pages
 	r.Get("/", pageHandlers.GetIndex)
+	r.Get("/recipe/{slug}", pageHandlers.GetRecipe(recipeService))
 
 	// Components
 	r.Route("/component", func(r chi.Router) {

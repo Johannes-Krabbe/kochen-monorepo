@@ -1,0 +1,107 @@
+{
+  "title": "Couscous - Salat mit Tomaten und Feta",
+  "description": "Ein leckerer und einfacher Couscous-Salat mit frischen Zutaten.",
+  "servings": 4,
+  "prepTimeMinutes": 15,
+  "cookTimeMinutes": 0,
+  "ingredients": [
+    {
+      "id": "couscous_01",
+      "item": "Couscous",
+      "amount": 125,
+      "unit": "g",
+      "notes": "instant",
+      "link": ""
+    },
+    {
+      "id": "broth_01",
+      "item": "Brühe",
+      "amount": 175,
+      "unit": "ml",
+      "notes": "Hühnerbrühe oder Gemüsebrühe",
+      "link": ""
+    },
+    {
+      "id": "lemon_juice_01",
+      "item": "Zitronensaft",
+      "amount": 2.5,
+      "unit": "EL",
+      "notes": "frisch gepresst",
+      "link": ""
+    },
+    {
+      "id": "parsley_01",
+      "item": "Petersilie",
+      "amount": 3,
+      "unit": "EL",
+      "notes": "frische, gehackt",
+      "link": ""
+    },
+    {
+      "id": "salt_01",
+      "item": "Salz",
+      "amount": 0.5,
+      "unit": "TL",
+      "notes": "",
+      "link": ""
+    },
+    {
+      "id": "pepper_01",
+      "item": "Pfeffer",
+      "amount": 0,
+      "unit": "",
+      "notes": "aus der Mühle",
+      "link": ""
+    },
+    {
+      "id": "feta_01",
+      "item": "Feta-Käse",
+      "amount": 150,
+      "unit": "g",
+      "notes": "fein gewürfelt, sehr gut eignet sich eingelegter Feta-Käse",
+      "link": ""
+    },
+    {
+      "id": "cherry_tomatoes_01",
+      "item": "Cherrytomaten",
+      "amount": 300,
+      "unit": "g",
+      "notes": "geviertelt",
+      "link": ""
+    },
+    {
+      "id": "spring_onions_01",
+      "item": "Frühlingszwiebeln",
+      "amount": 3,
+      "unit": "",
+      "notes": "in feine Ringe geschnitten",
+      "link": ""
+    },
+    {
+      "id": "olive_oil_01",
+      "item": "Olivenöl",
+      "amount": 0,
+      "unit": "",
+      "notes": "",
+      "link": ""
+    }
+  ],
+  "instructions": [
+    {
+      "step": 1,
+      "description": "Den @[Couscous, instant](couscous_01) in eine große Schüssel geben, mit der kochenden @[Hühnerbrühe oder Gemüsebrühe](broth_01) übergießen und 5 - 10 Minuten ziehen lassen. Ab und zu mit einer Gabel umrühren."
+    },
+    {
+      "step": 2,
+      "description": "Mit @[Zitronensaft, frisch gepresst](lemon_juice_01), den @[Petersilie, frische, gehackt](parsley_01), @[Salz](salt_01) und @[Pfeffer aus der Mühle](pepper_01) vermischen."
+    },
+    {
+      "step": 3,
+      "description": "Den @[Feta-Käse, fein gewürfelt](feta_01) mit @[olive_oil](olive_oil_01), @[cherry_tomatoes](cherry_tomatoes_01) und @[spring_onions](spring_onions_01) vorsichtig unterheben und abschmecken."
+    },
+    {
+      "step": 4,
+      "description": "Pur mit Brot oder als Beilage, z. B. zum Grillmenü servieren."
+    }
+  ]
+}
