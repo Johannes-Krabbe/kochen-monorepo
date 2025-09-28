@@ -13,6 +13,7 @@ templ RecipePage(recipe sqlc.Recipe, content services.RecipeContent) {
 				<h1 class="text-3xl font-bold">{ content.Title }</h1>
 				<p>by johannes - { recipe.CreatedAt.Format("02-01-2006") }</p>
 			</div>
+            <p class="bg-background">test</p>
 		</div>
 	}
 }
