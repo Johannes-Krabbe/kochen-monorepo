@@ -24,6 +24,11 @@ func NewRouter(db *DB) *chi.Mux {
 	fileServer := http.FileServer(http.Dir("./internal/ui/static/"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
 
+	// Favicon
+	r.Get("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./internal/ui/static/favicon.ico")
+	})
+
 	// === UI ===
 	// Services
 	recipeService := services.NewRecipeService(db.Queries)
