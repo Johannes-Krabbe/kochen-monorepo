@@ -3,6 +3,7 @@ module github.com/Johannes-Krabbe/kochen-monorepo/server
 go 1.24.5
 
 require (
+	github.com/Oudwins/tailwind-merge-go v0.2.1
 	github.com/a-h/templ v0.3.943
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/golang-jwt/jwt/v5 v5.3.0

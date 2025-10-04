@@ -1,0 +1,7 @@
+{
+  "componentsDir": "internal/ui/templui/components",
+  "utilsDir": "internal/ui/templui/utils",
+  "moduleName": "github.com/Johannes-Krabbe/kochen-monorepo/server",
+  "jsDir": "server/internal/ui/static/js/templui",
+  "jsPublicPath": "/static/js/templui"
+}

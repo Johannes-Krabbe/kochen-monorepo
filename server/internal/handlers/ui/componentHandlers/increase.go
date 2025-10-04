@@ -7,12 +7,12 @@ import (
 	"github.com/Johannes-Krabbe/kochen-monorepo/server/internal/utils"
 )
 
-var count = 0
+var Count = 0
 
 func PostIncrease(w http.ResponseWriter, r *http.Request) {
-	count++
+	Count++
 	w.Header().Set("Content-Type", "text/html")
 
-	component := components.Counter(count)
+	component := components.Counter(Count)
 	utils.Render(w, r, component)
 }

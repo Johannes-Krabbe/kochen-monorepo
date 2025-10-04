@@ -1,12 +1,24 @@
 package pages
 
 import "github.com/Johannes-Krabbe/kochen-monorepo/server/internal/ui/components"
+import "github.com/Johannes-Krabbe/kochen-monorepo/server/internal/ui/templui/components/button"
+import "github.com/Johannes-Krabbe/kochen-monorepo/server/internal/ui/templui/components/icon"
 
-templ Homepage() {
+templ Homepage(count int) {
 	@components.Base() {
-		@components.Counter(0)
-		<button hx-trigger="click" hx-target="#counter" hx-swap="innerHTML" hx-post="/component/increase">
-			Increase
-		</button>
+		<div class="flex flex-col items-center w-full mt-8">
+			@components.Counter(count)
+			@button.Button(button.Props{
+				Attributes: templ.Attributes{
+					"hx-trigger": "click",
+					"hx-target":  "#counter",
+					"hx-swap":    "innerHTML",
+					"hx-post":    "/component/increase",
+				},
+			}) {
+				@icon.Plus()
+				Increase
+			}
+		</div>
 	}
 }
